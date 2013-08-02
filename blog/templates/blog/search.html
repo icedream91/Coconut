@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+
+{% block webpage_title %}
+Search Results for: {{ keywords }}
+{% endblock %}
+
+
+{% block primary_content %}
+
+<div class="narrow_primary_div">
+{% if article_and_page_list %}
+<section><h1 class="search_title">Search Results for: {{ keywords }}</h1></section>
+{% for article_or_page in article_and_page_list %}
+    {% if article_or_page.type == 'article' %}
+    {% with article=article_or_page %}
+    <article>
+    <header><h1>
+        <a href="{% url 'article' article.pk %}">{{article.title}}</a>
+    </h1></header>
+    <div class="content">
+        {% autoescape off %}
+        {% with summary=article.summary %}
+        {% if summary %}
+            {{summary}}<br>
+            <a href="{% url 'article' article.pk %}">Read More →</a>
+        {% else %}
+            {{article.content}}
+        {% endif %}
+        {% endwith %}
+        {% endautoescape %}
+    </div>
+    
+    {% include "blog/article_footer.html" %}
+    </article>
+    {% endwith %}
+    
+    {% else %}
+    
+    {% with page=article_or_page %}
+    <article>
+    <header><h1>
+    <a href="{% url 'page' page.pk %}">{{page.title}}</a>
+    </h1></header>
+    <div class="content">
+    {% autoescape off %}
+    {{page.content}}
+    {% endautoescape %}
+    </div>
+    </article>
+    {% endwith %}
+
+    {% endif %}
+
+{% endfor %}
+
+{% else %}
+    <h1>Nothing found</h1>
+    <p>Please try again with some different keywords.</p>
+{% endif %}
+
+{% if article_and_page_list %}
+    {% include "blog/pagination_div.html" %}
+{% endif %}
+
+</div>
+{% endblock %}
+
+
+{% block aside %}
+    {% include 'blog/aside.html' %}
+{% endblock %}
+

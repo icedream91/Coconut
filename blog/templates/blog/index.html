@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block primary_content %}
+<div class="narrow_primary_div">
+    {% for article in article_list %}
+        <article>
+        <header><h1><a href="{% url 'article' article.pk %}">{{article.title}}</a></h1><header>
+        {% autoescape off %}
+        <div class="content">
+            {% with summary=article.summary %}
+            {% if summary %}
+                {{summary}}<br>
+                <a href="{% url 'article' article.pk %}">Read More →</a>
+            {% else %}
+                {{article.content}}
+            {% endif %}
+            {% endwith %}
+        </div>
+        {% endautoescape %}
+
+        {% include "blog/article_footer.html" %}
+        </article>
+    
+    {% empty %}
+        <p>No articles yet.</p>
+    {% endfor %}
+
+{% if article_list %}
+    {% include "blog/pagination_div.html" %}
+{% endif %}
+
+</div>
+{% endblock %}
+
+
+{% block aside %}
+    {% include 'blog/aside.html' %}
+{% endblock %}
+        

@@ -1,0 +1,25 @@
+{% load staticfiles %}
+
+{% if comment_list %}
+    <div class="comments">
+    {% for comment in comment_list %}
+        <article>
+            <header>
+            <img src="{{comment.author_gravatar_url}}" width="44" height="44">
+            <p>
+            {% if comment.author_url %}
+                <a href="{{comment.author_url}}" rel="nofollow">{{comment.author}}</a><br>
+            {% else %}
+                {{comment.author}}<br>
+            {% endif %}
+            {{comment.pub_time|date:"F j, Y \a\t H:i"}}
+            </p>
+            </header>
+            <div class="comment_content"><p>{{comment.content}}</p></div>
+        </article>
+    {% endfor %}
+    </div>
+{% endif %}
+
+
+

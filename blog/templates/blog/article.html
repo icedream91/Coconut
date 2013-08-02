@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block webpage_title %}
+{{article.title}}
+{% endblock %}
+
+
+{% block primary_content %}
+{% if article.has_aside %}
+    <div class="narrow_primary_div">
+{% else %}
+    <div class="wide_primary_div">
+{% endif %}
+
+
+<article>
+<header><h1>{{article.title}}
+{% if not article.published %}
+    <span class="preview"> (not published)</span>
+{% endif %}
+</h1></header>
+
+{% autoescape off %}
+<div class="content">{{article.content}}</div>
+{% endautoescape %}
+
+{% include "blog/article_footer.html" %}
+</article>
+
+
+<div class="comment_area">
+{% include "blog/comments.html" %}
+
+<div class="new_comment">
+<P class="leave_comment">Leave a Comment</p>
+<form action="{% url 'article' article.pk %}" method="post">{% csrf_token %}
+
+<p>Name</p>
+{{comment_form.author}}
+
+<p>Email</p>
+{{comment_form.author_email}}
+
+<p>Website</p>
+{{comment_form.author_url}}
+
+<p>Comment <span style="color:red;">*</span> {% if comment_form.content.errors %}
+    <span class="comment_error">Please enter a comment.</span>
+{% endif %}</p>
+{{comment_form.content}}
+<p></p>
+<input class="comment_submit" type="submit" value="Post Comment">
+
+</form>
+</div><!--new_comment-->
+</div><!--comment_area-->
+</div><!--primary_content-->
+
+{% endblock %}
+
+
+{% block aside %}
+{% if article.has_aside %}
+    {% include 'blog/aside.html' %}
+{% endif %}
+{% endblock %}

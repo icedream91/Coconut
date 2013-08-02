@@ -1,0 +1,54 @@
+{% load staticfiles %}
+
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link href="{% static 'blog/style.css' %}" rel="stylesheet">
+<link href="{% static 'blog/custom_style.css' %}" rel="stylesheet">
+<title>{% block webpage_title %}{{blog_name}}{% endblock %}</title>
+{% if not authenticated %}
+    {% include 'blog/google_analytics.html' %}
+{% endif %}
+</head>
+
+<body>
+
+<div class="page">
+{% if authenticated %}
+    <div class="admin">
+        <a href="/admin/">admin</a>
+    </div>
+{% endif %}
+
+<header>
+<h1 class="blog_name"><a href="/">{{blog_name}}</a></h1>
+
+<nav class="blog_nav">
+<ul>
+    <li class="page_item"><a href="/">Home</a></li>
+    {% for page in page_list %}
+        <li class="page_item"><a href="{% url 'page' page.pk %}">{{page.title}}</a></li>
+    {% endfor %}
+</ul>
+</nav>
+
+</header>
+
+
+<div class="container">
+{% block primary_content %}
+{% endblock %}
+
+{% block aside %}
+{% endblock %}
+</div>
+
+
+<footer class="blog_footer">
+Powered by <a href="https://github.com/icedream91/Coconut" target="_blank">Coconut</a>
+</footer>
+
+</div><!--page-->
+</body>
+</html>

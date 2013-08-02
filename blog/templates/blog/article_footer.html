@@ -1,0 +1,29 @@
+<footer class="article_footer">This article was 
+    {% if article.category %}
+        posted in <a href="{% url 'category' article.category.pk %}">{{article.category}}</a>
+        {% with tags=article.tags.all %}
+        {% if tags %}
+            and tagged with 
+            {% for tag in tags %}
+                <a href="{% url 'tag' tag.pk %}">{{tag}}</a>{% if not forloop.last %}, {% endif %}
+            {% endfor %}
+        {% endif %}
+        {% endwith %}
+        on {{article.pub_time|date:"F j, Y"}}.
+
+    {% else %}
+        {% with tags=article.tags.all %}
+        {% if tags %}
+            tagged with 
+            {% for tag in tags %}
+                <a href="{% url 'tag' tag.pk %}">{{tag}}</a>{% if not forloop.last %}, {% endif %}
+            {% endfor %}
+            on {{article.pub_time|date:"F j, Y"}}.
+        {% else %}
+            posted on {{article.pub_time|date:"F j, Y"}}.
+        {% endif %}
+        {% endwith %}
+
+    {% endif %}
+</footer>
+

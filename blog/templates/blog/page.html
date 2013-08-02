@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% block webpage_title %}
+{{page.title}}
+{% endblock %}
+
+{% block primary_content %}
+{% if page.has_aside %}
+    <div class="narrow_primary_div">
+{% else %}
+    <div class="wide_primary_div">
+{% endif %}
+
+<article>
+<header><h1>{{page.title}}
+{% if not page.published %}
+    <span class="preview"> (not published)</span>
+{% endif %}
+</h1></header>
+
+<div class="content">
+{% autoescape off %}
+{{page.content}}
+{% endautoescape %}
+</div>
+</article>
+
+
+<div class="comment_area">
+
+{% include 'blog/comments.html' %}
+
+<div class="new_comment">
+<p class="leave_comment">Leave a Comment</p>
+<form action="{% url 'page' page.pk %}" method="post">{% csrf_token %}
+
+<p>Name</p>
+{{comment_form.author}}
+
+<p>Email</p>
+{{comment_form.author_email}} {% if comment_form.author_email.errors %}
+    <span class="comment_error">Please enter a valid email address.</span>
+{% endif %}
+
+<p>Website</p>
+{{comment_form.author_url}} {% if comment_form.author_url.errors %}
+    <span class="comment_error">Please enter a valid URL.</span>
+{% endif %}
+
+<p>Comment <span style="color:red">*</span> {% if comment_form.content.errors %}
+    <span clsss="comment_error">Please enter a comment.</span>
+{% endif %}</p>
+{{comment_form.content}}
+<p></p>
+<input class="comment_submit" type="submit" value="Post Comment">
+</form>
+</div><!--new_comment-->
+</div><!--comment_area-->
+</div><!--primary_content-->
+
+{% endblock %}
+
+
+{% block aside %}
+{% if page.has_aside %}
+    {% include 'blog/aside.html' %}
+{% endif %}
+{% endblock %}
