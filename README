@@ -26,7 +26,7 @@ Quick start
 
 5. Run 'python manage.py syncdb' to create the blog models.
 
-6. Edit blog/initialize.py to set your blog name in variable blog_name, and run 'python manage.py shell' amd type 'import blog.initialize' to apply.
+6. Edit blog/initialize.py to set your blog name in variable blog_name, and run 'python manage.py shell' and type 'import blog.initialize' to apply.
 
 7. Start the development server and visit http://127.0.0.1:8000 to visit your blog.
 
