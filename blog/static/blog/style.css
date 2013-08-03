@@ -89,7 +89,10 @@ article{
     border-bottom:1px rgb(237,237,237) solid;
     margin-bottom:40px;
 }
-
+article header h1{
+    margin-bottom:10px;
+    line-height:30px;
+}
 .content article{
     border-bottom:none;
 }
@@ -324,6 +327,10 @@ pre{
     font-family:monospace;
     line-height:normal;
 
+    /* auto wrap*/
+    word-wrap:break-word;
+    word-break:break-all;
+    white-space:pre-wrap;
 }
 
 table{
@@ -340,4 +347,3 @@ td{
 .preview{
     color:red;
 }
-
