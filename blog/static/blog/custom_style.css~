@@ -1,7 +1,0 @@
-/* Put your custom css here */
-
-.content .img_note{
-    display:block;
-    margin-bottom:19px;
-    text-align:center;
-}
