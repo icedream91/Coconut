@@ -23,6 +23,7 @@
 {{page.content}}
 {% endautoescape %}
 </div>
+{% if authenticated %}<footer class="page_footer"><a href="/admin/blog/page/{{page.pk}}/">Edit</a></footer>{% endif %}
 </article>
 
 
