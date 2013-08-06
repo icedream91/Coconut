@@ -25,5 +25,6 @@
         {% endwith %}
 
     {% endif %}
-</footer>
+    {% if authenticated %}<a href="/admin/blog/article/{{article.pk}}/">Edit</a>{% endif %}
 
+</footer>
