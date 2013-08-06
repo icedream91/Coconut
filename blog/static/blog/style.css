@@ -135,6 +135,15 @@ article header h1 a:hover{
     color:rgb(33,117,155);
 }
 
+.page_footer a{
+    color:rgb(81,81,81);
+}
+.page_footer a:visited{
+    color:rgb(81,81,81);
+}
+.page_footer a:hover{
+    color:rgb(33,117,155);
+}
 
 .blog_footer{
     padding-top:30px;
