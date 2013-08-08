@@ -169,7 +169,7 @@ def category(request,category_id):
     content=_get_common_content(request)
 
     category=get_object_or_404(Category,pk=category_id)
-    article_list=Article.objects.filter(category=category,published=True)
+    article_list=Article.objects.filter(category=category,published=True).order_by('-pub_time')
     
 
     article_list,current_page,pagination_list=\
@@ -190,7 +190,7 @@ def tag(request,tag_id):
     content=_get_common_content(request)
 
     tag=get_object_or_404(Tag,pk=tag_id)
-    article_list=Article.objects.filter(tags=tag,published=True)
+    article_list=Article.objects.filter(tags=tag,published=True).order_by('-pub_time')
    
 
     article_list,current_page,pagination_list=\
