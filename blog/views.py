@@ -249,7 +249,7 @@ def search(request):
     
     eligible_article_and_page_list=[]
 
-    article_list=list(Article.objects.all())
+    article_list=list(Article.objects.order_by('-pub_time'))
     for article in article_list:
         if article.published:
             for keyword in keyword_list:
@@ -261,7 +261,7 @@ def search(request):
                 eligible_article_and_page_list.append(article)
     
 
-    page_list=list(Page.objects.all())
+    page_list=list(Page.objects.order_by('-pub_time'))
     for page in page_list:
         if page.published:
             for keyword in keyword_list:
