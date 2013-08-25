@@ -236,16 +236,16 @@ def search(request):
 
 
     try:    
-        keywords=request.GET.get('keywords').lower()
+        input_keywords=request.GET.get('keywords').lower()
     except AttributeError:
         """ 
         If no keywords is in request.GET, request.GET.get('keywords') will be
         None and has no lower() method. Catch AttributeError exception and set
         keywords to "".
         """
-        keywords=''
+        input_keywords=''
         
-    keyword_list=keywords.split()
+    keyword_list=input_keywords.split()
     
     eligible_article_and_page_list=[]
 
@@ -280,7 +280,8 @@ def search(request):
         article_and_page_list=article_and_page_list,
         current_page=current_page,
         pagination_list=pagination_list,
-        keywords=keywords,
+        keywords=input_keywords,
+        keyword_list=keyword_list,
     )
 
     return render(request,'blog/search.html',content) 
