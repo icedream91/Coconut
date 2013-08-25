@@ -3,8 +3,11 @@
         {% if current_page == page_num %}
             {{page_num}} 
         {% else %}
-            <a href="?page={{page_num}}">{{page_num}}</a> 
+        <a href="
+            {% if keyword_list %}?keywords={% for keyword in keyword_list %}{{keyword}}{% if not forloop.last %}+{% endif %}{% endfor %}&page={{page_num}}">{{page_num}}</a>
+            {% else %}
+                ?page={{page_num}}">{{page_num}}</a>
+            {% endif %}
         {% endif %}
     {% endfor %}
 </div>
-
