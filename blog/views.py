@@ -54,23 +54,28 @@ def _get_pagination(article_list,request):
             catch this exception and raise Http404 exception.
             """
             raise Http404
-    
+   
+
     requested_page_num=int(requested_page_num)
-
-    # Return only 5 previous page numbers and 4 later page numbers.
-    first_page_num=requested_page_num-5
-    while first_page_num<=0:
-        first_page_num+=1
-
-    last_page_num=requested_page_num+4
-    while last_page_num not in paginator.page_range:
-        last_page_num-=1
+    
+    remainder_page_num=10
+    first_page_num=requested_page_num
+    last_page_num=requested_page_num
+    while remainder_page_num:
+        if 1<first_page_num:
+            first_page_num-=1
+            remainder_page_num-=1
+        if last_page_num<paginator.page_range[-1]:
+            last_page_num+=1
+            remainder_page_num-=1
+        if first_page_num==1 and last_page_num==paginator.page_range[-1]:
+            break
 
 
     pagination_list=list(range(first_page_num,last_page_num+1))
 
     return article_list,requested_page_num,pagination_list
-    
+      
     
 def index(request):
     
