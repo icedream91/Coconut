@@ -1,7 +1,7 @@
-This is Coconut version 1.1.2
+This is Coconut version 1.3.0
 =============================
 
-Coconut is a simple blog system powered by Django. Coconut is written with Python 3.3.2 and Django 1.6 beta 1. You can see demo at http://zhuojun.me.
+Coconut is a simple blog system powered by Django. Coconut is written with Python 3.3.2 and Django 1.6 beta 4. You can see demo at http://zhuojun.me.
 
 
 Quick start
@@ -37,7 +37,7 @@ How to blogging
 When you visit http://127.0.0.1:8000, you will find that no articles is in the blog. You need to visit http://127.0.0.1:8000/admin and post your own articles.
 
 * Settings Model
-"Settings" model includes one record named "Blog Settings" which includes your blog name, number of articles showed on home page and the total views of your blog. You can change your blog name and number of articles showed on home page here. You can also see your blog views here. Note that only non-login user will be recorded in blog views.
+"Settings" model includes one record named "Blog Settings" which includes your blog name and number of articles showed on home page. You can change your blog name and number of articles showed on home page here.
 
 * Articles and Pages Model
 1) Articles and Pages models both has a property named "Has aside". If this property is false, then corresponding articles and pages will be displayed without aside, which means you could have a wider area to show your articles and pages.
@@ -54,6 +54,9 @@ If you need your custom CSS, you could add them in blog/static/blog/custom_style
 
 * Google Analytics
 If you want to insert Google Analytics code in your blog, you can add these code in blog/templates/blog/google_analytics.html file. Note that only when a non-login user views the blog these code will be ran.
+
+* Comments
+If you want readers to leave comments on your articles or pages, you can apply for a Disqus account, get your code and put it into blog/templates/disqus.html file.
 
 * Sitemap
 Your sitemap.xml address is /sitemap.xml .
