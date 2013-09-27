@@ -5,11 +5,9 @@ from django.http import HttpResponse
 from django.http import Http404
 from django.shortcuts import render
 from django.shortcuts import get_object_or_404
-from django.db.models import F
 from django.core.paginator import Paginator,EmptyPage,PageNotAnInteger
 
 from blog.models import *
-from blog.comment_form import *
 
 
 def _get_common_content(request):
@@ -27,10 +25,6 @@ def _get_common_content(request):
     tag_list=Tag.objects.extra(select=
         {'lower_name':'lower(name)'}
     ).order_by('lower_name')
-    
-    if request.user.is_anonymous():
-        # If the user is not administrator, plus 1 to page views.
-        Setting.objects.filter(pk=1).update(views=F('views')+1)
 
     return {
         'blog_name':setting.blog_name,
@@ -104,28 +98,9 @@ def article(request,article_id):
     article=get_object_or_404(Article,pk=article_id)
     if request.user.is_anonymous() and article.published==False:
         raise Http404
-    
-    comment_list=ArticleComment.objects.filter(article=article).order_by('pub_time')
 
-    if request.method=='POST':
-        comment_form=ArticleCommentForm(request.POST,auto_id=False)
-        if comment_form.is_valid():
-            article_comment=comment_form.save(commit=False)
-            article_comment.article=article
-            if not article_comment.author:
-                article_comment.author='Anonymous'
-            article_comment.save()
-            comment_form=ArticleCommentForm(auto_id=False)
-    else:
-        comment_form=ArticleCommentForm(auto_id=False)
-        if request.user.is_anonymous():
-            Article.objects.filter(pk=article_id).update(views=F('views')+1)
         
-    content.update(
-        article=article,
-        comment_list=comment_list,
-        comment_form=comment_form,
-    )
+    content.update(article=article)
 
     return render(request,'blog/article.html',content)
 
@@ -138,28 +113,8 @@ def page(request,page_id):
     if request.user.is_anonymous() and page.published==False:
         raise Http404
     
-    comment_list=PageComment.objects.filter(page=page).order_by('pub_time')
-
-    if request.method=='POST':
-        comment_form=PageCommentForm(request.POST,auto_id=False)
-        if comment_form.is_valid():
-            page_comment=comment_form.save(commit=False)
-            page_comment.page=page
-            if not page_comment.author:
-                page_comment.author='Anonymous'
-            page_comment.save()
-            comment_form=PageCommentForm(auto_id=False)
-    else:
-        comment_form=PageCommentForm(auto_id=False)
-        if request.user.is_anonymous():
-            Page.objects.filter(pk=page_id).update(views=F('views')+1)
-
     
-    content.update(
-        page=page,
-        comment_list=comment_list,
-        comment_form=comment_form,
-    )
+    content.update(page=page)
     
     return render(request,'blog/page.html',content)
 
