@@ -28,33 +28,9 @@
 {% include "blog/article_footer.html" %}
 </article>
 
+{% include 'blog/disqus.html' %}
 
-<div class="comment_area">
-{% include "blog/comments.html" %}
 
-<div class="new_comment">
-<P class="leave_comment">Leave a Comment</p>
-<form action="{% url 'article' article.pk %}" method="post">{% csrf_token %}
-
-<p>Name</p>
-{{comment_form.author}}
-
-<p>Email</p>
-{{comment_form.author_email}}
-
-<p>Website</p>
-{{comment_form.author_url}}
-
-<p>Comment <span style="color:red;">*</span> {% if comment_form.content.errors %}
-    <span class="comment_error">Please enter a comment.</span>
-{% endif %}</p>
-{{comment_form.content}}
-<p></p>
-<input class="comment_submit" type="submit" value="Post Comment">
-
-</form>
-</div><!--new_comment-->
-</div><!--comment_area-->
 </div><!--primary_content-->
 
 {% endblock %}
