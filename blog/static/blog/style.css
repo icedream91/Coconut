@@ -253,67 +253,7 @@ aside ul li a:hover{
 }
 
 
-.comment_area{
-    margin-bottom:40px;
-    margin-top:90px;
-}
-.comment_area .leave_comment{
-   font-size:16px;
-   font-weight:bold;
-}
-.comment_area form input{
-    height:32px;
-    line-height:20px;
-    width:290px;
-    font-size:12px;
-    padding-left:10px;
-    padding-right:10px;
-    border-width:1px;
-    border-style:solid;
-    border-color:rgb(204,204,204);
-}
-.comment_area .new_comment form textarea{
-    width:625px;
-    height:182px;
-    padding:10px 10px 10px 10px;
-    border-style:solid;
-    border-color:rgb(204,204,204);
-}
-.comment_area form .comment_submit{
-    font-size:11px;
-    height:29px;
-    line-height:15px;
-    width:100px;
-    background-color:rgb(221,221,221);
-}
-.comment_error{
-    color:red;
-}
-.comments article header img{
-    float:left;
-    margin-right:15px;
-}
-.comments article header p{
-    font-size:15px;
-}
-.comments article header p a{
-   color:black;
-}
-.comments article header p a:visited{
-    color:black;
-}
-.comments article header p a:hover{
-    color:rgb(33,117,155);
-}
-.comments article .comment_content p{
-    font-size:14px;
-}
-.comments article .comment_content{
-    clear:both;
-}
-.new_comment form textarea{
-    border-width:1px 1px 1px 1px;
-}
+
 .pagination a{
     color:rgb(33,117,155);
 }
