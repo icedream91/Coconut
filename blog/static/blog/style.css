@@ -107,7 +107,9 @@ article header h1 a:visited{
 article header h1 a:hover{
     color:black;
 }
-
+.content{
+    text-align:justify;
+}
 
 .content a{
     color:rgb(33,117,155);
