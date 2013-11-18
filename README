@@ -1,7 +1,7 @@
-This is Coconut version 1.3.2
+This is Coconut version 1.3.3
 =============================
 
-Coconut is a simple blog system powered by Django. Coconut is written with Python 3.3.2 and Django 1.6 beta 4. You can see demo at http://zhuojun.me.
+Coconut is a simple blog system powered by Django. Coconut is written with Python 3.3.2 and Django 1.6. You can see demo at http://zhuojun.me.
 
 
 Quick start
