@@ -11,10 +11,8 @@ from blog.models import *
 
 
 def _get_common_content(request):
-    """ 
-    This function return some common content, like blog name,
-    tag list, category list, and so on.
-    """
+    # This function return some common content, like blog name,
+    # tag list, category list, and so on.
     setting=Setting.objects.get(pk=1)
     page_list=Page.objects.filter(published=True).order_by('page_order')
 
@@ -34,11 +32,11 @@ def _get_common_content(request):
         'authenticated':request.user.is_authenticated(),
     }
         
+
 def _get_pagination(article_list,request):
     
     setting=Setting.objects.get(pk=1)
     paginator=Paginator(article_list,setting.showed_article_num)
-
     requested_page_num=request.GET.get('page')
 
     if requested_page_num==None:
@@ -48,16 +46,12 @@ def _get_pagination(article_list,request):
         try:
             article_list=paginator.page(requested_page_num)
         except (PageNotAnInteger,EmptyPage):
-            """
-            If request for a page number bigger than the biggest existing
-            page number, Django will raise EmptyPage exception, and we 
-            catch this exception and raise Http404 exception.
-            """
+            # If request for a page number bigger than the biggest existing
+            # page number, Django will raise EmptyPage exception, and we 
+            # catch this exception and raise Http404 exception.
             raise Http404
-   
 
     requested_page_num=int(requested_page_num)
-    
     remainder_page_num=10
     first_page_num=requested_page_num
     last_page_num=requested_page_num
@@ -71,7 +65,6 @@ def _get_pagination(article_list,request):
         if first_page_num==1 and last_page_num==paginator.page_range[-1]:
             break
 
-
     pagination_list=list(range(first_page_num,last_page_num+1))
 
     return article_list,requested_page_num,pagination_list
@@ -80,10 +73,7 @@ def _get_pagination(article_list,request):
 def index(request):
     
     content=_get_common_content(request)
-
     article_list=Article.objects.filter(published=True).order_by('-pub_time')
-
-
     article_list,current_page,pagination_list=\
         _get_pagination(article_list,request)
 
@@ -99,12 +89,10 @@ def index(request):
 def article(request,article_id):
     
     content=_get_common_content(request)
-
     article=get_object_or_404(Article,pk=article_id)
     if request.user.is_anonymous() and article.published==False:
         raise Http404
 
-        
     content.update(article=article)
 
     return render(request,'blog/article.html',content)
@@ -118,7 +106,6 @@ def page(request,page_id):
     if request.user.is_anonymous() and page.published==False:
         raise Http404
     
-    
     content.update(page=page)
     
     return render(request,'blog/page.html',content)
@@ -131,7 +118,6 @@ def category(request,category_id):
     category=get_object_or_404(Category,pk=category_id)
     article_list=Article.objects.filter(category=category,published=True).order_by('-pub_time')
     
-
     article_list,current_page,pagination_list=\
         _get_pagination(article_list,request)
 
@@ -152,7 +138,6 @@ def tag(request,tag_id):
     tag=get_object_or_404(Tag,pk=tag_id)
     article_list=Article.objects.filter(tags=tag,published=True).order_by('-pub_time')
    
-
     article_list,current_page,pagination_list=\
         _get_pagination(article_list,request)
 
@@ -170,6 +155,7 @@ def search(request):
     def _get_plain_text(html):
 
         class PlainTextHTMLParser(HTMLParser):
+
             def __init__(self):
                 super().__init__(self)
                 self.data=[]
@@ -194,15 +180,12 @@ def search(request):
 
         return plain_content
 
-
     try:    
         input_keywords=request.GET.get('keywords').lower()
     except AttributeError:
-        """ 
-        If no keywords is in request.GET, request.GET.get('keywords') will be
-        None and has no lower() method. Catch AttributeError exception and set
-        keywords to "".
-        """
+        # If no keywords is in request.GET, request.GET.get('keywords') will be
+        # None and has no lower() method. Catch AttributeError exception and set
+        # keywords to "".
         input_keywords=''
         
     keyword_list=input_keywords.split()
@@ -245,5 +228,3 @@ def search(request):
     )
 
     return render(request,'blog/search.html',content) 
-
-    

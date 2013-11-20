@@ -46,7 +46,7 @@ Search Results for: {{ keywords }}
     {{page.content}}
     {% endautoescape %}
     </div>
-    {% if authenticated %}<footer class="page_footer"><a href="/admin/blog/page/{{page.pk}}/">Edit</a></footer>{% endif %}
+    <footer class="page_footer">This page was updated on {{page.pub_time|date:"F j, Y"}}. {% if authenticated %}<a href="/admin/blog/page/{{page.pk}}/">Edit</a>{% endif %}</footer>
     </article>
     {% endwith %}
 

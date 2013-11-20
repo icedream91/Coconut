@@ -54,6 +54,7 @@ body{
     margin-bottom:0px;
 }
 
+
 .page_item{
     list-style-type:none;
     font-size:14px;
@@ -137,6 +138,10 @@ article header h1 a:hover{
     color:rgb(33,117,155);
 }
 
+
+.page_footer{
+    color:rgb(81,81,81);
+}
 .page_footer a{
     color:rgb(81,81,81);
 }
@@ -146,6 +151,7 @@ article header h1 a:hover{
 .page_footer a:hover{
     color:rgb(33,117,155);
 }
+
 
 .blog_footer{
     padding-top:30px;
@@ -294,6 +300,7 @@ td{
     border-top:1px solid rgb(117,117,117);
     border-bottom:1px solid rgb(117,117,117);
 }
+
 
 .preview{
     color:red;

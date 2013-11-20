@@ -7,26 +7,23 @@
 </form>
 </div>
 
-
 {% if category_list %}
-<header>Categories</header>
-<ul>
-{% for category in category_list %}
-    <li><a href="{% url 'category' category.pk %}">{{category.name}}</a> ({{category.published_article_num}})</li>
-{% endfor %}
-</ul>
+    <header>Categories</header>
+    <ul>
+    {% for category in category_list %}
+        <li><a href="{% url 'category' category.pk %}">{{category.name}}</a> ({{category.published_article_num}})</li>
+    {% endfor %}
+    </ul>
 {% endif %}
-
 
 {% if tag_list %}
-<header>Tags</header>
-<ul>
-{% for tag in tag_list %}
-    <li><a href="{% url 'tag' tag.pk %}">{{tag.name}}</a> ({{tag.published_article_num}})</li>
-{% endfor %}
-<ul>
+    <header>Tags</header>
+    <ul>
+    {% for tag in tag_list %}
+        <li><a href="{% url 'tag' tag.pk %}">{{tag.name}}</a> ({{tag.published_article_num}})</li>
+    {% endfor %}
+    <ul>
 {% endif %}
-
 
 </aside>
 
